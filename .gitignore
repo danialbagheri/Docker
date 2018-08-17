@@ -1,0 +1,5 @@
+wordpressTest/src/*
+nginx-proxy/conf.d/*
+nginx-proxy/certs/*
+nginx-proxy/html/*
+nginx-proxy/vhost.d/*

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  mywebsite_db: # Database name
+    image: mysql:5.7
+    container_name: mywebsite_db # Database name
+    volumes:
+      - ./src/database/initdb.d:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: aieububsnlVUOBWHLEINA # any random string will do
+      MYSQL_DATABASE: mywebsite_db # the name of your mysql database
+      MYSQL_USER: mywebsiteuser # the name of the database user
+      MYSQL_PASSWORD: K-117Gap)7567S # the password of the mysql user
+
+  the10thday_wp:
+    depends_on:
+      - mywebsite_db
+    image: wordpress:latest
+    container_name: the10thday_wp
+    expose:
+       - 3000
+    restart: always
+    links:
+      - mywebsite_db:mysql
+    environment:
+      VIRTUAL_POST: 3000 
+      VIRTUAL_HOST: test.the10thday.com
+      LETSENCRYPT_HOST: test.the10thday.com
+      LETSENCRYPT_EMAIL: danial@lincocare.com
+    volumes:
+      - ./src:/var/www/html
+networks:
+  default:
+    external:
+      name: nginx-proxy
