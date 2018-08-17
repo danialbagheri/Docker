@@ -19,12 +19,13 @@ services:
     image: wordpress:latest
     container_name: the10thday_wp
     expose:
-       - 3000
+      - 80 
+      - 443
     restart: always
     links:
       - mywebsite_db:mysql
     environment:
-      VIRTUAL_POST: 3000 
+      VIRTUAL_POST: 80 
       VIRTUAL_HOST: test.the10thday.com
       LETSENCRYPT_HOST: test.the10thday.com
       LETSENCRYPT_EMAIL: danial@lincocare.com
